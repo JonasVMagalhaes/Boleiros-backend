@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "skipLibCheck": true,
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "target": "es6",
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "outDir": "dist"
+  },
+  "lib": ["es2015"],
+  "paths": {
+    "@enums/*": ["enums/*"],
+    "@features/*": ["features/*"],
+    "@middlewares/*": ["src/middlewares/*"],
+    "@models/*": ["models/*"]
+  }
+}

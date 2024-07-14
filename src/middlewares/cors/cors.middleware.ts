@@ -3,7 +3,7 @@ import { RequisitionMethod } from "../../enums/requisition-methods.enum";
 import { DeviceInfoEnum } from "../../enums/device-info.enum";
 import { AuthHeaderEnum } from "../../enums/auth-header.enum";
 
-export class CorsMiddleware {
+export default class CorsMiddleware {
     static middleware = cors({
         origin: ["http://localhost:4200"],
         optionsSuccessStatus: 200,

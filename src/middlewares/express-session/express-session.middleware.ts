@@ -1,6 +1,6 @@
 const session = require('express-session');
 
-export class ExpressSessionMiddleware {
+export default class ExpressSessionMiddleware {
     static middleware = session({
         secret: process.env.EXPRESS_SESSION_TOKEN, // Chave secreta para criptografar dados da sessão
         resave: false, // Evita a resalva da sessão se nada mudou

@@ -6,7 +6,7 @@ import {RegisterService} from "./services/register.service";
 import {ResponsePrimitive} from "../../shared/interfaces/response-primitive.interface";
 import {Register} from "./dtos/register";
 import {RequisitionBodyResponse} from "./models/requisition-body-response";
-import {HttpValidatorErrorUtils} from "../../shared/utils/http/http-validator-error.utils";
+import ErrorDB from "../../schemes/error/error.schema";
 
 export class RegisterController {
     private readonly service: RegisterService = new RegisterService();
@@ -14,10 +14,16 @@ export class RegisterController {
     handlePost(request: Request, response: Response) {
         const errors: Result<ValidationError> = validationResult(request);
         if (!errors.isEmpty()) {
-            return HttpValidatorErrorUtils.emit(request, response, { code: HttpStatus.BAD_REQUEST, message: errors.array()[0].msg });
+            return HttpUtils.emitResponse(response, { code: HttpStatus.BAD_REQUEST, message: errors.array()[0].msg });
         }
 
-        const result: ResponsePrimitive<RequisitionBodyResponse> = this.service.save(Register.fromDto(request.body));
-        return HttpUtils.emitResponse(response, result);
+        try {
+            const result: ResponsePrimitive<RequisitionBodyResponse> = this.service.save(Register.fromDto(request.body));
+            return HttpUtils.emitResponse(response, result);
+        } catch (err) {
+            ErrorDB.create(RegisterController.name, request, HttpStatus.INTERNAL_SERVER_ERROR, err.stack);
+            response.status(HttpStatus.INTERNAL_SERVER_ERROR).end();
+        }
+
     }
 }

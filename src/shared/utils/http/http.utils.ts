@@ -2,12 +2,12 @@ import express, { Response } from "express";
 import {ResponsePrimitive} from "../../interfaces/response-primitive.interface";
 
 export class HttpUtils {
-    static emitResponse<T>(res: Response, response: ResponsePrimitive<T>): express.Response<T> {
+    static emitResponse<T>(response: Response, result: ResponsePrimitive<T>): express.Response<T> {
         const responseData : { message: string, data?: T } = {
-            message: response.message,
-            data: response.data
+            message: result.message,
+            data: result.data
         };
 
-        return res.status(response.code).json(responseData);
+        return response.status(result.code).json(responseData);
     }
 }

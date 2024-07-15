@@ -19,8 +19,6 @@ export class RegisterController {
         }
 
         try {
-            let teste;
-            teste.teste = ""
             const result: ResponsePrimitive<RequisitionBodyResponse> = this.service.save(Register.fromDto(request.body));
             return HttpUtils.emitResponse(response, result);
         } catch (err) {

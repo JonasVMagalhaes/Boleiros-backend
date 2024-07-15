@@ -1,23 +1,15 @@
 import express from 'express';
+import {SignController} from "./sign.controller";
+import {SignValidatorService} from "./services/sign-validator.service";
 
-export default class SignController {
-    constructor(private readonly router: express.Router) { }
+export default class SignRouter {
+    constructor(readonly router: express.Router) { }
 
-    initializeRoutes() {
-        this.router.get('/sign', this.handleGetRequest);
-    }
+    initializeRoutes(): SignRouter {
+        const signController: SignController = new SignController();
+        const signValidatorService: SignValidatorService = new SignValidatorService();
 
-    handleGetRequest(req: express.Request, res: express.Response) {
-        return res.send('Funcionou');
-        // console.log("teste123")
-        // const signin = true;
-        // if(signin) {
-        //     req.session.user = {
-        //         username: 'Jonas',
-        //         accessToken: '123456'
-        //     }
-        // }
-        //
-        // res.status(200).json({})
+        this.router.post('/', signValidatorService.handlePostValidator(), (req, res) => signController.handlePost(req, res));
+        return this;
     }
 }

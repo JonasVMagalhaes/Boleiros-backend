@@ -7,6 +7,7 @@ import {ResponsePrimitive} from "../../shared/interfaces/response-primitive.inte
 import {Register} from "./dtos/register";
 import {RequisitionBodyResponse} from "./models/requisition-body-response";
 import ErrorDB from "../../schemes/error/error.schema";
+import ErrorDBAction from "../../schemes/error/error.schema";
 
 export class RegisterController {
     private readonly service: RegisterService = new RegisterService();
@@ -18,12 +19,19 @@ export class RegisterController {
         }
 
         try {
+            let teste;
+            teste.teste = ""
             const result: ResponsePrimitive<RequisitionBodyResponse> = this.service.save(Register.fromDto(request.body));
             return HttpUtils.emitResponse(response, result);
         } catch (err) {
-            ErrorDB.create(RegisterController.name, request, HttpStatus.INTERNAL_SERVER_ERROR, err.stack);
-            response.status(HttpStatus.INTERNAL_SERVER_ERROR).end();
+            ErrorDBAction.create({
+                code: HttpStatus.INTERNAL_SERVER_ERROR,
+                pathError: RegisterController.name,
+                method: request.method,
+                payload: request.body,
+                message: err.stack
+            });
+            return response.status(HttpStatus.INTERNAL_SERVER_ERROR).end();
         }
-
     }
 }

@@ -10,7 +10,6 @@ import RegisterRouter from "./features/register/register.router";
 
 import {RoutesEnum} from "./shared/enums/routes.enum";
 import Database from "./configurations/database";
-import TimeoutMiddleware from "./middlewares/timeout/timeout.middleware";
 
 export default class Configuration {
     private router: Router;
@@ -36,7 +35,6 @@ export default class Configuration {
         app.use(ExpressSessionMiddleware.middleware);
         app.use(CorsMiddleware.middleware);
         app.use(HelmetMiddleware.middleware);
-        app.use(TimeoutMiddleware.middleware)
     }
 
     private applyRoutes(app: Express): void {

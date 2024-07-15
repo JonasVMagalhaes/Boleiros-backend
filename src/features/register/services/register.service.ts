@@ -1,4 +1,3 @@
-import {Request} from 'express';
 import {ResponsePrimitive} from "../../../shared/interfaces/response-primitive.interface";
 import {HttpStatus} from "../../../shared/enums/http-status.enum";
 import {Register} from "../dtos/register";

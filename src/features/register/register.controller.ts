@@ -6,6 +6,7 @@ import {RegisterService} from "./services/register.service";
 import {ResponsePrimitive} from "../../shared/interfaces/response-primitive.interface";
 import {Register} from "./dtos/register";
 import {RequisitionBodyResponse} from "./models/requisition-body-response";
+import {HttpValidatorErrorUtils} from "../../shared/utils/http/http-validator-error.utils";
 
 export class RegisterController {
     private readonly service: RegisterService = new RegisterService();
@@ -13,7 +14,7 @@ export class RegisterController {
     handlePost(request: Request, response: Response) {
         const errors: Result<ValidationError> = validationResult(request);
         if (!errors.isEmpty()) {
-            return HttpUtils.emitResponse(response, { code: HttpStatus.BAD_REQUEST, message: errors.array()[0].msg });
+            return HttpValidatorErrorUtils.emit(request, response, { code: HttpStatus.BAD_REQUEST, message: errors.array()[0].msg });
         }
 
         const result: ResponsePrimitive<RequisitionBodyResponse> = this.service.save(Register.fromDto(request.body));

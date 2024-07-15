@@ -34,10 +34,10 @@ export default class Configuration {
         this.router = express.Router();
 
         const signRouter: SignRouter = new SignRouter(this.router);
-        app.use(RoutesEnum.SIGN, signRouter.initializeRoutes().router);
+        app.use(RoutesEnum.EMPTY, signRouter.initializeRoutes().router);
 
         const registerRouter: RegisterRouter = new RegisterRouter(this.router);
-        app.use(RoutesEnum.REGISTER, registerRouter.initializeRoutes().router);
+        app.use(RoutesEnum.EMPTY, registerRouter.initializeRoutes().router);
     }
 
     configureEnvironments(): void {

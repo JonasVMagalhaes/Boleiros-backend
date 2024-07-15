@@ -1,15 +1,17 @@
-import express from 'express';
+import express, {Request, Response} from 'express';
 import {RegisterController} from "./register.controller";
 import {RegisterValidatorService} from "./services/register-validation.service";
+import {RoutesEnum} from "../../shared/enums/routes.enum";
 
 export default class RegisterRouter {
     constructor(readonly router: express.Router) { }
 
     initializeRoutes(): RegisterRouter {
-        const signController: RegisterController = new RegisterController();
-        const signValidatorService: RegisterValidatorService = new RegisterValidatorService();
+        const registerController: RegisterController = new RegisterController();
+        const registerValidatorService: RegisterValidatorService = new RegisterValidatorService();
 
-        this.router.post('/', signValidatorService.handlePostValidator(), (req, res) => signController.handlePost(req, res));
+        this.router.post(RoutesEnum.REGISTER, registerValidatorService.handlePostValidator(),
+            (req: Request, res: Response) => registerController.handlePost(req, res));
         return this;
     }
 }

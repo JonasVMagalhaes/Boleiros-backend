@@ -1,4 +1,5 @@
 export enum RoutesEnum {
-    SIGN = "/sign",
-    REGISTER = "/register"
+    EMPTY = '/',
+    SIGN = '/sign',
+    REGISTER = '/register'
 }

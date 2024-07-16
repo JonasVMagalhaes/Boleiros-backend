@@ -1,4 +1,5 @@
-const session = require('express-session');
+import {ConfigurationsApp} from "../../configurations/application";
+import session from 'express-session';
 
 export default class ExpressSessionMiddleware {
     static middleware = session({
@@ -6,7 +7,7 @@ export default class ExpressSessionMiddleware {
         resave: false, // Evita a resalva da sessão se nada mudou
         saveUninitialized: false, // Evita salvar sessões não inicializadas
         cookie: {
-            maxAge: 3 * 60 * 60 * 1000, // Define o tempo máximo para armazenamento do cache de informações
+            maxAge: ConfigurationsApp.timeCache, // Define o tempo máximo para armazenamento do cache de informações
         }
     });
 }

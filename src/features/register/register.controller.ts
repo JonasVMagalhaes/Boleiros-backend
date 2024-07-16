@@ -6,20 +6,19 @@ import {RegisterService} from "./services/register.service";
 import {ResponsePrimitive} from "../../shared/interfaces/response-primitive.interface";
 import {Register} from "./dtos/register";
 import {RequisitionBodyResponse} from "./models/requisition-body-response";
-import ErrorDB from "../../schemes/error/error.schema";
 import ErrorDBAction from "../../schemes/error/error.schema";
 
 export class RegisterController {
-    private readonly service: RegisterService = new RegisterService();
+    async handlePost(request: Request, response: Response) {
+        const service: RegisterService = new RegisterService(request, Register.fromDto(request.body));
 
-    handlePost(request: Request, response: Response) {
         const errors: Result<ValidationError> = validationResult(request);
         if (!errors.isEmpty()) {
             return HttpUtils.emitResponse(response, { code: HttpStatus.BAD_REQUEST, message: errors.array()[0].msg });
         }
 
         try {
-            const result: ResponsePrimitive<RequisitionBodyResponse> = this.service.save(Register.fromDto(request.body));
+            const result: ResponsePrimitive<RequisitionBodyResponse> = await service.save();
             return HttpUtils.emitResponse(response, result);
         } catch (err) {
             ErrorDBAction.create({

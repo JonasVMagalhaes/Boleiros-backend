@@ -3,18 +3,15 @@ import {Request} from 'express';
 import {ResponsePrimitive} from "../../../shared/interfaces/response-primitive.interface";
 import {HttpStatus} from "../../../shared/enums/http-status.enum";
 import {Register} from "../dtos/register";
-import {RequisitionBodyResponse} from "../models/requisition-body-response";
-import {ContextMessager} from "../../../shared/utils/messager/context-messager";
-import {NodeMailerStrategy} from "../../../shared/utils/messager/email/nodemailer-strategy";
-import SignInDBActions from "../../../schemes/sign-in/sign-in.schema";
 import {UserDBActions} from "../../../schemes/user/user-db-actions";
+import {ResponsePostRegister} from "../models/response-post-register";
+import {SignInDbActions} from "../../../schemes/sign-in/sign-in-db-actions";
 
 export class RegisterCreateUsecase {
-
     constructor(private readonly request: Request,
                 private readonly register: Register) {}
 
-    async execute(): Promise<ResponsePrimitive<RequisitionBodyResponse>> {
+    async execute(): Promise<ResponsePrimitive<{} | ResponsePostRegister>> {
         const alreadyParameters: string = await this.validateAlreadyParameters();
         if(alreadyParameters) {
             return this.emitErrorAlreadyParameters(alreadyParameters);
@@ -23,13 +20,17 @@ export class RegisterCreateUsecase {
         const registerSaved = await this.performSaveUser();
         const signInSaved = await this.perfomSignIn(registerSaved.id);
 
-        // this.saveUserCache(signInSaved.access_token);
-        // this.sendEmail();
+        this.saveUserCache(signInSaved.access_token);
+        this.sendEmail();
 
         return {
             code: HttpStatus.OK,
             message: "Salvo com sucesso",
-            data: registerSaved
+            data: Register.toDto({
+                username: this.register.username,
+                access_token: signInSaved.access_token,
+                expire_time: signInSaved.expire_time
+            })
         }
     }
 
@@ -48,18 +49,20 @@ export class RegisterCreateUsecase {
     }
 
     private saveUserCache(accessToken: string): void {
+        console.log("TODO - Falta implementar")
         // this.request.session.id = accessToken;
     }
 
     private sendEmail(): void {
-        const emailMessager: ContextMessager = new ContextMessager(new NodeMailerStrategy());
-
-        emailMessager.send({
-            from: 'string',
-            to: 'string',
-            subject: 'string',
-            message: 'string'
-        });
+        console.log('TODO - Falta implementar');
+        // const emailMessager: ContextMessager = new ContextMessager(new NodeMailerStrategy());
+        //
+        // emailMessager.send({
+        //     from: 'string',
+        //     to: 'string',
+        //     subject: 'string',
+        //     message: 'string'
+        // });
     }
 
     private performSaveUser() {
@@ -72,7 +75,7 @@ export class RegisterCreateUsecase {
     }
 
     private perfomSignIn(idUser: string) {
-        return SignInDBActions.save({ idUser });
+        return SignInDbActions.save({ idUser });
     }
 
     private emitErrorAlreadyParameters(error: string): ResponsePrimitive<{}> {

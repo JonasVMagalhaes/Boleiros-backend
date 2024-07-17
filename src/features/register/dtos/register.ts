@@ -1,5 +1,5 @@
-import {RequisitionBodyRegister} from "../models/requisition-body-register";
-import {RequisitionBodyResponse} from "../models/requisition-body-response";
+import {RequestPostRegister} from "../models/request-post-register";
+import {ResponsePostRegister} from "../models/response-post-register";
 
 export class Register {
     private _id: string;
@@ -28,7 +28,7 @@ export class Register {
         return this._phone;
     }
 
-    static fromDto(body: RequisitionBodyRegister): Register {
+    static fromDto(body: RequestPostRegister): Register {
         const register = new Register();
         register._username = body.username;
         register._password = body.password;
@@ -37,9 +37,15 @@ export class Register {
         return register;
     }
 
-    static toDto(register: Register): RequisitionBodyResponse {
+    static toDto(register: {
+        username: string,
+        access_token: string,
+        expire_time: number
+    }): ResponsePostRegister {
         return {
-            id: register._id
+            username: register.username,
+            access_token: register.access_token,
+            expire_time: register.expire_time,
         };
     }
 }

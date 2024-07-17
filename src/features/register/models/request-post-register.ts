@@ -1,4 +1,4 @@
-export interface RequisitionBodyRegister {
+export interface RequestPostRegister {
     username: string;
     password: string;
     email: string;

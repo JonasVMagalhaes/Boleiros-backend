@@ -15,7 +15,6 @@
     "@types/nodemailer": "^6.4.15",
     "cors": "^2.8.5",
     "express": "^4.19.2",
-    "express-session": "^1.18.0",
     "express-validator": "^7.1.0",
     "helmet": "^7.1.0",
     "jsonwebtoken": "^9.0.2",

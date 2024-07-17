@@ -12,6 +12,8 @@ export default class RegisterRouter {
 
         this.router.post(RoutesEnum.REGISTER, registerValidatorService.handlePostValidator(),
             (req: Request, res: Response) => registerController.handlePost(req, res));
+        this.router.get(RoutesEnum.REGISTER + "/:id",
+            (req: Request, res: Response) => registerController.handleGet(req, res));
         return this;
     }
 }

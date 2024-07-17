@@ -1,6 +1,8 @@
 import mongoose, {Document, Schema} from 'mongoose';
 import {HttpStatus} from "../../shared/enums/http-status.enum";
 import {v4 as uuidv4} from 'uuid';
+import {CollectionName} from "../models/collection-name.enum";
+import {ConfigSchema} from "../config-schema";
 
 export interface ErrorDBModel {
     code: HttpStatus;
@@ -28,9 +30,9 @@ const errorSchema = new Schema<ErrorDB>({
     payload: { type: Schema.Types.Mixed, required: true },
     message: { type: String, required: true },
     date: { type: Date, required: true },
-});
+}, ConfigSchema);
 
-const ErrorModel = mongoose.model<ErrorDB>('Error', errorSchema);
+const ErrorModel = mongoose.model<ErrorDB>(CollectionName.ERRORS, errorSchema);
 
 export default class ErrorDBAction {
     static create(error: ErrorDBModel): void {

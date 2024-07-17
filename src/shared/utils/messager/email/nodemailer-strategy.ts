@@ -21,6 +21,9 @@ export class NodeMailerStrategy implements MessagerStrategy {
             auth: {
                 user: '',
                 pass: ''
+            },
+            tls: {
+                rejectUnauthorized: false
             }
         });
     }

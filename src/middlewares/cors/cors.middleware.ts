@@ -1,7 +1,7 @@
 import cors from "cors";
-import { RequisitionMethod } from "../../enums/requisition-methods.enum";
-import { DeviceInfoEnum } from "../../enums/device-info.enum";
-import { AuthHeaderEnum } from "../../enums/auth-header.enum";
+import { RequisitionMethod } from "../../shared/enums/requisition-methods.enum";
+import { DeviceInfoEnum } from "../../shared/enums/device-info.enum";
+import { AuthHeaderEnum } from "../../shared/enums/auth-header.enum";
 
 export default class CorsMiddleware {
     static middleware = cors({

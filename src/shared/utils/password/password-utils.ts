@@ -1,5 +1,5 @@
 export class PasswordUtils {
-    isCommon(value: string): boolean {
+    static isCommon(value: string): boolean {
         return /password/i.test(value)
             || /123456/i.test(value)
             || /qwerty/i.test(value)

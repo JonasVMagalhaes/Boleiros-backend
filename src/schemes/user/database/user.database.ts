@@ -24,7 +24,7 @@ export class UserDatabase {
 
     private createCollectionSensitiveUserModel(): void {
         this.sensitiveUserModel.createCollection({
-            viewOn: 'users',
+            viewOn: CollectionName.USERS.toLowerCase(),
             pipeline: [
                 {
                     $set: {

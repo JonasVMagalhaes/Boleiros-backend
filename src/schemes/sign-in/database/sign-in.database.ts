@@ -9,6 +9,7 @@ export class SignInDatabase {
 
     constructor() {
         this.setupCollections();
+        this.setupTriggers();
     }
 
     private setupCollections(): void {
@@ -17,5 +18,10 @@ export class SignInDatabase {
 
     private createCollectionSignInModel(): void {
         this.signInModel.createCollection();
+    }
+
+    private setupTriggers(): void {
+        this.signInModel.watch()
+            .on('change', () => this.signInModel.updateOne({ modifiedDate: Date.now }));
     }
 }

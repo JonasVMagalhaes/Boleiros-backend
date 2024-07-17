@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 
-import {SignInDatabase} from "./database/signIn.database";
+import {SignInDatabase} from "./database/sign-in.database";
 import {JwtUtils} from "../../shared/utils/jwt/jwt.utils";
 import {ConfigurationsApp} from "../../configurations/application";
 import {SignInDBModel} from "./models/sign-in-db-model.interface";

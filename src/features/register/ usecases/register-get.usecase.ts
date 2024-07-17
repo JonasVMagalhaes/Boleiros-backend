@@ -1,5 +1,5 @@
 import {Request} from 'express';
-import UserDBActions from "../../../schemes/user/user.schema";
+import {SensitiveUserDBActions, UserDBActions} from "../../../schemes/user/user.schema";
 import {HttpStatus} from "../../../shared/enums/http-status.enum";
 
 export class RegisterGetUsecase {
@@ -11,7 +11,9 @@ export class RegisterGetUsecase {
         this.id = this.request.params.id;
 
         const user = await UserDBActions.findItemById(this.id);
+        const sensitiveUser = await SensitiveUserDBActions.findItemById(this.id);
         const emailVerified = await UserDBActions.findVerifiedEmailById(this.id);
+
 
         return {
             code: HttpStatus.OK,

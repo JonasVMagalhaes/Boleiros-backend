@@ -6,7 +6,7 @@ import {RequisitionBodyResponse} from "../models/requisition-body-response";
 import {ContextMessager} from "../../../shared/utils/messager/context-messager";
 import {NodeMailerStrategy} from "../../../shared/utils/messager/email/nodemailer-strategy";
 import SignInDBActions from "../../../schemes/sign-in/sign-in.schema";
-import UserDBActions from "../../../schemes/user/user.schema";
+import { UserDBActions } from "../../../schemes/user/user.schema";
 
 export class RegisterCreateUsecase {
 

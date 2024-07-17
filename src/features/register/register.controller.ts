@@ -7,8 +7,8 @@ import {ResponsePrimitive} from "../../shared/interfaces/response-primitive.inte
 import {Register} from "./dtos/register";
 import {RequisitionBodyResponse} from "./models/requisition-body-response";
 import ErrorDBAction from "../../schemes/error/error.schema";
-import {RegisterCreateUsecase} from "./ usecases/register-create.usecase";
-import {RegisterGetUsecase} from "./ usecases/register-get.usecase";
+import {RegisterCreateUsecase} from "./usecases/register-create.usecase";
+import {RegisterGetUsecase} from "./usecases/register-get.usecase";
 
 export class RegisterController {
     async handlePost(request: Request, response: Response) {

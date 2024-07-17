@@ -1,4 +1,5 @@
 import {Request} from 'express';
+
 import {ResponsePrimitive} from "../../../shared/interfaces/response-primitive.interface";
 import {HttpStatus} from "../../../shared/enums/http-status.enum";
 import {Register} from "../dtos/register";
@@ -6,7 +7,7 @@ import {RequisitionBodyResponse} from "../models/requisition-body-response";
 import {ContextMessager} from "../../../shared/utils/messager/context-messager";
 import {NodeMailerStrategy} from "../../../shared/utils/messager/email/nodemailer-strategy";
 import SignInDBActions from "../../../schemes/sign-in/sign-in.schema";
-import { UserDBActions } from "../../../schemes/user/user.schema";
+import {UserDBActions} from "../../../schemes/user/user-db-actions";
 
 export class RegisterCreateUsecase {
 

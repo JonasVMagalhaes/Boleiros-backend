@@ -1,6 +1,7 @@
 import {Request} from 'express';
-import {SensitiveUserDBActions, UserDBActions} from "../../../schemes/user/user.schema";
 import {HttpStatus} from "../../../shared/enums/http-status.enum";
+import {UserDBActions} from "../../../schemes/user/user-db-actions";
+import {SensitiveUserDBActions} from "../../../schemes/user/sensitive-user-db-actions";
 
 export class RegisterGetUsecase {
     private id: string;

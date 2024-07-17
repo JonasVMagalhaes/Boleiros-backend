@@ -15,14 +15,14 @@ export class UserDatabase {
 
     private setupCollections(): void {
         this.createCollectionUserModel();
-        this.createCollectionSensitiveUserModel();
+        this.createCollectionViewSensitiveUserModel();
     }
 
     private createCollectionUserModel(): void {
         this.userModel.createCollection();
     }
 
-    private createCollectionSensitiveUserModel(): void {
+    private createCollectionViewSensitiveUserModel(): void {
         this.sensitiveUserModel.createCollection({
             viewOn: CollectionName.USERS.toLowerCase(),
             pipeline: [

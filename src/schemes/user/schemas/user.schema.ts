@@ -80,7 +80,7 @@ export const userSchema = new Schema<UserDB>({
         default: Date.now
     },
 }, {
-    autoCreate: false,
-    autoIndex: false,
+    autoCreate: false, // Necessário para o trigger do SensisitiveUser
+    autoIndex: false, // Necessário para o trigger do SensisitiveUser
     ...ConfigSchema
 });

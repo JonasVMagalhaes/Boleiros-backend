@@ -1,3 +1,17 @@
 export enum Country {
-    BRAZIL = "Brasil"
+    BRAZIL = "Brasil",
+    USA = "Estados Unidos",
+    CANADA = "Canada",
+    MEXICO = "Mexico",
+    ARGENTINA = "Argentina",
+    CHILE = "Chile",
+    COLOMBIA = "Colombia",
+    PERU = "Peru",
+    VENEZUELA = "Venezuela",
+    BOLIVIA = "Bolivia",
+    ECUADOR = "Equador",
+    PARAGUAY = "Paraguai",
+    URUGUAY = "Uruguai",
+    GUYANA = "Guiana",
+    SURINAME = "Suriname",
 }
